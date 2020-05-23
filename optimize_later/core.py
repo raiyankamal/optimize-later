@@ -11,7 +11,7 @@ from optimize_later.utils import NoArgDecoratorMeta, with_metaclass
 from optimize_later import utils
 
 log = logging.getLogger(__name__.rpartition('.')[0] or __name__)
-timer = [time.time, time.monotonic][os.name == 'nt']
+timer = time.perf_counter
 
 
 def _generate_default_name():
