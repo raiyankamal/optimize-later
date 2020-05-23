@@ -11,23 +11,8 @@ from optimize_later.utils import NoArgDecoratorMeta, with_metaclass
 from optimize_later import utils
 
 log = logging.getLogger(__name__.rpartition('.')[0] or __name__)
+timer = [time.time, time.monotonic][os.name == 'nt']
 
-def _get_timer():
-    """
-    Returns the approprite timer method
-    for the current OS and version of Python
-    """
-    options = [time.time,]
-    try:
-        options.append(time.clock)
-    except AttributeError:
-        # Expected to occur in Python 3.8 since time.clock is removed in this version of Python.
-        options.append(time.monotonic)
-    
-    timer = options[os.name == 'nt']
-    return timer
-
-timer = _get_timer()
 
 def _generate_default_name():
     for entry in inspect.stack():
