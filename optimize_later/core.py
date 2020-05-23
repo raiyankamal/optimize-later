@@ -22,7 +22,7 @@ def _get_timer():
         options.append(time.clock)
     except AttributeError:
         # Expected to occur in Python 3.8 since time.clock is removed in this version of Python.
-        options.append(time.process_time)
+        options.append(time.monotonic)
     
     timer = options[os.name == 'nt']
     return timer
